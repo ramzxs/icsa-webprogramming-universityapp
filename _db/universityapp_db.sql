@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `universityapp_db`
 --
+CREATE SCHEMA IF NOT EXISTS `universityapp_db`;
+USE `universityapp_db`;
 
 -- --------------------------------------------------------
 
