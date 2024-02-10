@@ -18,8 +18,18 @@
             padding: 20px;
         }
 
+        header span {
+            border-radius: 32px;
+            height: 32px;
+            width: 32px;
+            color: darkgreen;
+            background-color: white;
+            display: inline-block;
+        }
+
         main {
-            padding: 20px;
+            padding: 20px; /* top right bottom left */
+            padding: 20px 100px; /* top&bottom left&right */
         }
 
         table, td {
@@ -31,7 +41,8 @@
             background-color: #333333;
         }
 
-        a {
+        .student-id {
+            text-align: center;
             font-weight: bold;
             text-decoration: none;
             padding: 5px;
@@ -39,8 +50,9 @@
             background-color: blueviolet;
             border: 1px solid gray;
             border-radius: 8px;
+            display: block;
         }
-        a:hover {
+        .student-id:hover {
             color: yellow;
             background-color: darkviolet;
         }
@@ -57,55 +69,77 @@
             font-size: x-small;
             background-color: lightgray;
         }
+
+        .note {
+            font-size: small;
+            color: lightgray;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div>Universite App</div>
+        <span>Q8</span>
+        Universite App
     </header>
 
     <main>
         <h1>STUDENTS LIST</h1>
 
-        <table cellspacing="0" cellpadding="10">
-            <tr class="table-header">
-                <td>STUDENT ID NUMBER</td>
-                <td>STUDENT INFO</td>
-            </tr>
-
-            <?php
-            $DBCONN = mysqli_connect("localhost", "root", "", "universityapp_db");
-
-            $stringSQL = "SELECT id, fullName FROM student ORDER BY id";
-
-            $result = $DBCONN->query($stringSQL); // [ [row1] , [row2], [rowN] ]
-
-            while ($row = $result->fetch_assoc()) {
-                ?>
-
-                <tr>
-                    <td>
-                        <a href="#" onclick="showInfo('<?= $row['id'] ?>')"><?= $row['id'] ?></a>
-                    </td>
-                    <td id="student<?= $row['id'] ?>" class="info">
-                        
-                    </td>
+        <table cellspacing="0" cellpadding="10" width="100%">
+            <thead>
+                <tr class="table-header">
+                    <td width="170">STUDENT ID NUMBER</td>
+                    <td>STUDENT INFO</td>
                 </tr>
-
+            </thead>
+            <tbody>
                 <?php
-            }
-            ?>
-           
+                $DBCONN = mysqli_connect("localhost", "root", "", "universityapp_db");
+                
+                $sqlCommand = "SELECT * FROM `student`";
+
+                $result = $DBCONN->query($sqlCommand); // result = all records or rows found (1)
+                // [
+                //        0 => ['id' = 'A0001', 'fulName' = 'Last, First Middle'],
+                //        1 => ['id' = 'A0002', 'fulName' = 'Surname, Given NoMiddle']
+                // ]
+
+                if ($result->num_rows > 0) {
+                    ?>
+                    <tr>
+                        <td colspan="2">There are <?php echo $result->num_rows ?> records found.</td>
+                    </tr>
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        // row = ['id' = 'A0001', 'fulName' = 'Last, First, Middle']
+                        // row = ['id' = 'A0002', 'fulName' = 'Surname, Given NoMiddle']
+                        ?>
+
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?= $row['fullName'] ?></td>
+                        </tr>
+
+                        <?php
+                    }
+                } else {
+                    echo "<tr><td colspan=\"2\">No records found</td></tr>";
+                }
+                ?>
+            </tbody>
         </table>
     </main>
     <script>
         function showInfo(n) {
-            document.getElementById('student' + n).innerHTML = "Sample Data for " + n;
+            console.log("showInfo: which row? " + n);
+
+            document.getElementById('student'+n).innerHTML = "Do something here " + (new Date).getTime();
         }
     </script>
 
     <footer>
-        &copy; 2023 by Me. All rights reserved.
+        <p>&copy; 2023 by Me. All rights reserved.</p>
+        <p>Visit my FB page: <a href="http://fb.me/x">http://fb.me/x</a></p>
     </footer>
 </body>
 </html>
