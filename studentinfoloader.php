@@ -6,4 +6,4 @@ $result = $DB->query("SELECT * FROM student WHERE id = '".$_GET['id']."'");
 
 $row = $result->fetch_assoc();
 
-echo $row['nameLast'].', '.$row['nameFirst'].', '.$row['nameMiddle'];
+echo strtoupper($row['nameLast']).',<br>'.$row['nameFirst'].', '.$row['nameMiddle'];
