@@ -112,6 +112,7 @@
                 FROM student;
                 */
                 $result = $DB->query("SELECT * FROM view_student");
+                // $result = $DB->query("SELECT * FROM student");
 
                 // LISTING OF ROWS
                 for ($i = 0; $i < $result->num_rows; $i++) {
@@ -128,6 +129,7 @@
                         <td>
                             <a href="#" onclick="" class="student-id">
                                 <?= $row['longIDNumber'] ?>
+                                <?php /* $row['id'] */ ?>
                             </a>
                         </td>
                         <td class="info">
