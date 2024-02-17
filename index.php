@@ -79,7 +79,7 @@
 <body>
     <header>
         <span>Q8</span>
-        Universite App
+        Universite App <?= date('H:i:s') ?>
     </header>
 
     <main>
@@ -109,17 +109,19 @@
                 // LISTING OF ROWS
                 for ($i = 0; $i < $result->num_rows; $i++) {
                     $row = $result->fetch_assoc();
+                    $ALLSTUDENTS[] = $row;
                     ?>
                     <tr>
                         <td>
-                            <a href="#" onclick="" class="student-id">
+                            <a href="#" onclick="showInfo(<?= $i ?>, <?= $row['id'] ?>)" class="student-id">
                                 <?= $row['longIDNumber'] ?>
                                 <?php /* $row['id'] */ ?>
                             </a>
                         </td>
-                        <td class="info">
-                            <?= $row['fullName'] ?>
+                        <td class="info" id="info<?= $i ?>">
+                            <!-- innerHTML -->
                         </td>
+                        <?php // $row['nameLast'].', '.$row['nameFirst'].' '.$row['nameMiddle'] ?>
                     </tr>
                     <?php
                     // $row 1-D Associative Array
@@ -128,9 +130,7 @@
                     //    'fullName'  => 'Five'
                     // ]
                     // echo $i.' = ' . $row['fullName']. ' ('.$row['id'].')<br>';  
-                }
-
-                ?>
+                } ?>
                 
                 <tr>
                     <td colspan="2" style="text-align: center">
@@ -142,6 +142,17 @@
                 </tr>
             </tbody>
         </table>
+        <script>
+            async function showInfo(n, id) {
+                console.log('showInfo: ' + n + " = " + id);
+
+                // Form Processing (GET & POST)
+                const response = await fetch('studentinfoloader.php?id='+id);
+                const text = await response.text();
+
+                document.getElementById('info' + n).innerHTML = text;
+            }
+        </script>
     </main>
 
     <footer>
