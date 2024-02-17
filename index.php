@@ -103,28 +103,13 @@
                 $DB = mysqli_connect('127.0.0.1', 'root', '', 'universityapp_db') or die("Database Connection Error");
 
                 // SQL COMMAND EXECUTION
-                /*
-                CREATE OR REPLACE VIEW `view_student` AS
-                SELECT
-                    LPAD(id, 5, '0') AS `longIDNumber`,
-                    student.*,                        
-                    CONCAT(fullName,' (',id,')') AS `studentInfo`
-                FROM student;
-                */
                 $result = $DB->query("SELECT * FROM view_student");
                 // $result = $DB->query("SELECT * FROM student");
 
                 // LISTING OF ROWS
                 for ($i = 0; $i < $result->num_rows; $i++) {
                     $row = $result->fetch_assoc();
-                    // $row 1-D Associative Array
-                    // $row = [
-                    //    'id'        => '5',
-                    //    'fullName'  => 'Five'
-                    // ]
-                    // echo $i.' = ' . $row['fullName']. ' ('.$row['id'].')<br>';  
                     ?>
-
                     <tr>
                         <td>
                             <a href="#" onclick="" class="student-id">
@@ -136,8 +121,13 @@
                             <?= $row['fullName'] ?>
                         </td>
                     </tr>
-
                     <?php
+                    // $row 1-D Associative Array
+                    // $row = [
+                    //    'id'        => '5',
+                    //    'fullName'  => 'Five'
+                    // ]
+                    // echo $i.' = ' . $row['fullName']. ' ('.$row['id'].')<br>';  
                 }
 
                 ?>
