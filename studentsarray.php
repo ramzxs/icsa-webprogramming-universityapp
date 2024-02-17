@@ -90,6 +90,7 @@
                 <tr class="table-header">
                     <td width="170">STUDENT ID NUMBER</td>
                     <td>STUDENT INFO</td>
+                    <td>MOBILE #</td>
                 </tr>
             </thead>
             <tbody>
@@ -126,10 +127,12 @@
                 
                 // MULTI-DIMENSIONAL ARRAY
                 $students = [
-                    // Col 0          Column 1
-                    [  '0001', 'First Student, I'],      // Row 0
-                    [  '0002', 'Second Student'],        // Row 1
-                    [  '0003', 'Third Student, III']     // Row 2
+                    // Col 0             Column 1
+                    // $students[R][0]   $students[R][1]
+                    [  '0001',           'First Student, I',    '+965'],    // $students[0]
+                    [  '0002',           'Second Student',      '+63'],     // $students[1]
+                    [  '0003',           'Third Student, III',  '+965'],    // $students[2]
+                    [  '0004',           'Forty Student, IV',   '+63']      // $students[3]
                 ];
 
                 // $i = 0, 1, 2
@@ -145,18 +148,21 @@
                         <td class="info">
                             <?php echo $students[$i][1]; ?>
                         </td>
+                        <td>
+                            <?= $students[$i][2] ?>
+                        </td>
                     </tr>
                     <?php
                 }
                 ?>
-                
-
-                <?php
-                
-                
-                ?>
                 <tr>
-                    <td colspan="2" style="text-align: center">There are <b>1</b> record/s found.</td>
+                    <td colspan="3" style="text-align: center">
+                        There are
+                        <b>
+                            <?php echo count($students) ?>
+                        </b>
+                        record/s found.
+                    </td>
                 </tr>
             </tbody>
         </table>
