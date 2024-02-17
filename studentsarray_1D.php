@@ -95,12 +95,10 @@
             </thead>
             <tbody>
                 <?php
-                /*
                 // Single-Dimensional Array
                 //               0                1    
-                $student1 = ['0001', 'First Student'];            // Normal
-                $student2 = [0 => '0002', 1 => 'Second Student']; // Normal
-                // $
+                $student1 = ['0001', 'First Student'];
+                $student2 = [0 => '0002', 1 => 'Second Student'];
                 ?>
                 <tr>
                     <td>
@@ -122,44 +120,12 @@
                         <?php echo $student2[1]; ?>
                     </td>
                 </tr>
-                */
-                
-                
-                // MULTI-DIMENSIONAL ARRAY
-                $students = [
-                    // Col 0             Column 1
-                    // $students[R][0]   $students[R][1]
-                    [  '0001',           'First Student, I',    '+965'],    // $students[0]
-                    [  '0002',           'Second Student',      '+63'],     // $students[1]
-                    [  '0003',           'Third Student, III',  '+965'],    // $students[2]
-                    [  '0004',           'Forty Student, IV',   '+63']      // $students[3]
-                ];
 
-                // $i = 0, 1, 2
-                for ($i = 0; $i < count($students); $i++) {
-                    ?>
-                    <tr>
-                        <td>
-                            <a href="#" onclick="" class="student-id">
-                                <?php echo $students[$i][0]; ?>
-                            </a>
-                            
-                        </td>
-                        <td class="info">
-                            <?php echo $students[$i][1]; ?>
-                        </td>
-                        <td>
-                            <?= $students[$i][2] ?>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
                 <tr>
                     <td colspan="3" style="text-align: center">
                         There are
                         <b>
-                            <?php echo count($students) ?>
+                            2
                         </b>
                         record/s found.
                     </td>

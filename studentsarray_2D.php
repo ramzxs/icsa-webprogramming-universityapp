@@ -90,63 +90,49 @@
                 <tr class="table-header">
                     <td width="170">STUDENT ID NUMBER</td>
                     <td>STUDENT INFO</td>
+                    <td>MOBILE #</td>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // $i = 0;
-                // $c = 'c';
-                // $str = "String";
-                // OBJECTS ->
+                // MULTI-DIMENSIONAL ARRAY
+                $students = [
+                    // Col 0             Column 1
+                    // $students[R][0]   $students[R][1]
+                    [  '0001',           'First Student, I',    '+965'],    // $students[0]
+                    [  '0002',           'Second Student',      '+63'],     // $students[1]
+                    [  '0003',           'Third Student, III',  '+965'],    // $students[2]
+                    [  '0004',           'Forty Student, IV',   '+63']      // $students[3]
+                ];
 
-                // DATABASE CONNECTION
-                $DB = mysqli_connect('127.0.0.1', 'root', '', 'universityapp_db') or die("Database Connection Error");
-
-                // SQL COMMAND EXECUTION
-                /*
-                CREATE OR REPLACE VIEW `view_student` AS
-                SELECT
-                    LPAD(id, 5, '0') AS `longIDNumber`,
-                    student.*,                        
-                    CONCAT(fullName,' (',id,')') AS `studentInfo`
-                FROM student;
-                */
-                $result = $DB->query("SELECT * FROM view_student");
-
-                // LISTING OF ROWS
-                for ($i = 0; $i < $result->num_rows; $i++) {
-                    $row = $result->fetch_assoc();
-                    // $row 1-D Associative Array
-                    // $row = [
-                    //    'id'        => '5',
-                    //    'fullName'  => 'Five'
-                    // ]
-                    // echo $i.' = ' . $row['fullName']. ' ('.$row['id'].')<br>';  
+                // $i = 0, 1, 2
+                for ($i = 0; $i < count($students); $i++) {
                     ?>
-
                     <tr>
                         <td>
                             <a href="#" onclick="" class="student-id">
-                                <?= $row['longIDNumber'] ?>
+                                <?php echo $students[$i][0]; ?>
                             </a>
+                            
                         </td>
                         <td class="info">
-                            <?= $row['fullName'] ?>
+                            <?php echo $students[$i][1]; ?>
+                        </td>
+                        <td>
+                            <?= $students[$i][2] ?>
                         </td>
                     </tr>
-
                     <?php
                 }
-
                 ?>
-                
                 <tr>
-                    <td colspan="2" style="text-align: center">
+                    <td colspan="3" style="text-align: center">
                         There are
                         <b>
-                            <?= $result->num_rows ?>
+                            <?php echo count($students) ?>
                         </b>
-                        record/s found.</td>
+                        record/s found.
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -94,59 +94,63 @@
             </thead>
             <tbody>
                 <?php
-                // $i = 0;
-                // $c = 'c';
-                // $str = "String";
-                // OBJECTS ->
+                // ASSOCIATIVE ARRAY
+                // $myArray = [
+                //     'ID'    => '0001',
+                //     'Phone' => '+965 1',
+                //     'Name'  => 'First Student'                    
+                // ];
+                // echo $myArray[];
 
-                // DATABASE CONNECTION
-                $DB = mysqli_connect('127.0.0.1', 'root', '', 'universityapp_db') or die("Database Connection Error");
+                $students = [
+                    [
+                        'ID'   => '0001',
+                        'Name' => 'First Student'
+                    ],
+                    [
+                        'ID'   => '0002',
+                        'Name' => 'Second Student'
+                    ],
+                    [
+                        'ID'   => '0003',
+                        'Name' => 'Third Student'
+                    ],
+                    [
+                        'ID'   => '0004',
+                        'Name' => 'Fourth Student'
+                    ],
+                    [
+                        'ID'   => '0005',
+                        'Name' => 'Fifth Student'
+                    ]
+                ];
 
-                // SQL COMMAND EXECUTION
-                /*
-                CREATE OR REPLACE VIEW `view_student` AS
-                SELECT
-                    LPAD(id, 5, '0') AS `longIDNumber`,
-                    student.*,                        
-                    CONCAT(fullName,' (',id,')') AS `studentInfo`
-                FROM student;
-                */
-                $result = $DB->query("SELECT * FROM view_student");
-
-                // LISTING OF ROWS
-                for ($i = 0; $i < $result->num_rows; $i++) {
-                    $row = $result->fetch_assoc();
-                    // $row 1-D Associative Array
-                    // $row = [
-                    //    'id'        => '5',
-                    //    'fullName'  => 'Five'
-                    // ]
-                    // echo $i.' = ' . $row['fullName']. ' ('.$row['id'].')<br>';  
+                for ($i = 0; $i < count($students); $i++) {
                     ?>
 
                     <tr>
                         <td>
-                            <a href="#" onclick="" class="student-id">
-                                <?= $row['longIDNumber'] ?>
+                            <a href="#" class="student-id">
+                                <?= $students[$i]['ID'] ?>
                             </a>
                         </td>
                         <td class="info">
-                            <?= $row['fullName'] ?>
+                            <?= $students[$i]['Name'] ?>
                         </td>
                     </tr>
 
                     <?php
+                    // echo $i.' = $students['.$i.'][\'Name\'] = '..' ($students['.$i.'][\'ID\'] ='.$students[$i]['ID'].')<br>';
                 }
-
                 ?>
-                
                 <tr>
                     <td colspan="2" style="text-align: center">
                         There are
                         <b>
-                            <?= $result->num_rows ?>
+                            <?= count($students) ?>
                         </b>
-                        record/s found.</td>
+                        record/s found.
+                    </td>
                 </tr>
             </tbody>
         </table>
