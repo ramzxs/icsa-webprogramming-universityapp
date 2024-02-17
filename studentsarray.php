@@ -93,16 +93,68 @@
                 </tr>
             </thead>
             <tbody>
+                <?php
+                /*
+                // Single-Dimensional Array
+                //               0                1    
+                $student1 = ['0001', 'First Student'];            // Normal
+                $student2 = [0 => '0002', 1 => 'Second Student']; // Normal
+                // $
+                ?>
                 <tr>
                     <td>
                         <a href="#" onclick="" class="student-id">
-                            ID_HERE
+                            <?php echo $student1[0]; ?>
                         </a>
                     </td>
                     <td class="info">
-                        NAME_HERE
+                        <?php echo $student1[1]; ?>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="" class="student-id">
+                            <?php echo $student2[0]; ?>
+                        </a>
+                    </td>
+                    <td class="info">
+                        <?php echo $student2[1]; ?>
+                    </td>
+                </tr>
+                */
+                
+                
+                // MULTI-DIMENSIONAL ARRAY
+                $students = [
+                    // Col 0          Column 1
+                    [  '0001', 'First Student, I'],      // Row 0
+                    [  '0002', 'Second Student'],        // Row 1
+                    [  '0003', 'Third Student, III']     // Row 2
+                ];
+
+                // $i = 0, 1, 2
+                for ($i = 0; $i < count($students); $i++) {
+                    ?>
+                    <tr>
+                        <td>
+                            <a href="#" onclick="" class="student-id">
+                                <?php echo $students[$i][0]; ?>
+                            </a>
+                            
+                        </td>
+                        <td class="info">
+                            <?php echo $students[$i][1]; ?>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                
+
+                <?php
+                
+                
+                ?>
                 <tr>
                     <td colspan="2" style="text-align: center">There are <b>1</b> record/s found.</td>
                 </tr>
